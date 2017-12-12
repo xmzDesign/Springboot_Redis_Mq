@@ -23,7 +23,7 @@
 
 
         <!--jdbc的数据库连接-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://rm-8vbse1w4r2110s3i6o.mysql.zhangbei.rds.aliyuncs.com:3306/hd_tcs?autoReconnect=true&amp;useUnicode=true&amp;useSSL=false&amp;characterEncoding=UTF-8" userId="risk2017" password="Chaney2017">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="" userId="" password="">
         </jdbcConnection>
 
 

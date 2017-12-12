@@ -28,9 +28,9 @@ public class MybatisConfig implements TransactionManagementConfigurer{
 
      private String driverClassName = "com.mysql.jdbc.Driver";
      private String url =
-     "jdbc:mysql://rm-8vbse1w4r2110s3i6o.mysql.zhangbei.rds.aliyuncs.com:3306/hd_tcs?autoReconnect=true&useUnicode=true&useSSL=false&characterEncoding=UTF-8";
-     private String username = "risk2017";
-     private String password = "Chaney2017";
+     "";
+     private String username = "";
+     private String password = "";
      private boolean defaultAutoCommit = true;
      private int maxActive = 2;
      private int maxIdle = 2;
