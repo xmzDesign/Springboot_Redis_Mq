@@ -34,6 +34,8 @@ public class AssignlogServiceImplement implements AssignlogService {
         AssignLogEntityExample assignLogEntityExample=new AssignLogEntityExample();
         AssignLogEntityExample.Criteria criteria = assignLogEntityExample.createCriteria();
         Map<Object, Object> xmz = mapRedisTemplate.entries("xmz");
+        mapRedisTemplate.put("assign","xmz","23");
+        Object o = mapRedisTemplate.get("assign", "xmz");
 
         List<AssignLogEntity> assignLogEntities = assignLogEntityMapper.selectByExample(assignLogEntityExample);
         return assignLogEntities;

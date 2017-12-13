@@ -17,7 +17,11 @@ public class RedisApplicationTests {
 	public void contextLoads() {
 		stringRedisTemplate.opsForValue().set("xmz","23");
 		String xmz = stringRedisTemplate.opsForValue().get("xmz");
+		stringRedisTemplate.watch("xmz");
+		stringRedisTemplate.multi();
+		String xmz1 = stringRedisTemplate.opsForValue().get("xmz");
 		System.out.println(xmz);
+		System.out.println(xmz1);
 	}
 
 }

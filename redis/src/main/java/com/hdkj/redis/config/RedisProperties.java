@@ -14,7 +14,7 @@ import java.util.List;
  * @Date 2017/12/4
  */
 @ConfigurationProperties(prefix = "spring.redis")
-@PropertySource("classpath:application.properties")
+//@PropertySource("classpath:application.properties")
 public class RedisProperties {
     /**
      * Database index used by the connection factory.
