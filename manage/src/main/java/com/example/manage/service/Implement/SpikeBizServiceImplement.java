@@ -1,6 +1,8 @@
 package com.example.manage.service.Implement;
 
+import com.example.manage.entity.QueueConstant;
 import com.example.manage.service.SpikeBizService;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -27,6 +29,9 @@ public class SpikeBizServiceImplement implements SpikeBizService {
 
     @Resource(name = "jsonRedisTemplate")
     private RedisTemplate<String, Object> stringObjectRedisTemplate;
+
+    @Resource
+    private AmqpTemplate amqpTemplate;
 
     public static final String REIDS_KEY="watchkeys";
 
@@ -73,11 +78,14 @@ public class SpikeBizServiceImplement implements SpikeBizService {
                 //System.out.println("现在的watchkeys为"+watchkeys2);
                 stringObjectRedisTemplate.opsForValue().increment(REIDS_KEY,-1);
                 List<Object> exec = stringObjectRedisTemplate.exec();// 提交事务，如果此时watchkeys被改动了，则返回null
+
+
                 if(CollectionUtils.isEmpty(exec)){
                     String failuserifo = "fail"+userinfo;
                     String failinfo="用户：" + failuserifo + "商品争抢失败，抢购失败";
                     System.out.println(failinfo);
                     stringObjectRedisTemplate.opsForValue().set(failuserifo,failinfo,60);
+                    amqpTemplate.convertAndSend(QueueConstant.SPIKE_FAIL_QUENUE,failinfo);
                 }else{
                     for(Object succ : exec){
                         String succuserifo ="succ"+succ.toString() +userinfo ;
@@ -86,6 +94,7 @@ public class SpikeBizServiceImplement implements SpikeBizService {
                         System.out.println(succinfo);
                         /* 抢购成功业务逻辑 */
                         stringObjectRedisTemplate.opsForValue().set(succuserifo, succinfo,60);
+                        amqpTemplate.convertAndSend(QueueConstant.SPIKE_SUCCESS_QUENUE,succinfo);
                     }
                 }
             }else {
