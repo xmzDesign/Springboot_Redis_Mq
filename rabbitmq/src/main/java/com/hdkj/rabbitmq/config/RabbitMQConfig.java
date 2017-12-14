@@ -146,10 +146,4 @@ public class RabbitMQConfig {
         return container;
     }
 
-
-
-
-
-
-
 }

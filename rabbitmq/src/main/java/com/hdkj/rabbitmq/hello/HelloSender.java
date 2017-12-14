@@ -3,6 +3,8 @@ package com.hdkj.rabbitmq.hello;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
@@ -20,9 +22,15 @@ public class HelloSender {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void send() {
+    @RequestMapping(value = "hello")
+    @ResponseBody
+    public String  send() {
         String context = "hello " + new Date();
-        System.out.println("Sender : " + context);
-        this.rabbitTemplate.convertAndSend("hello", context);
-    }
+
+            System.out.println("Sender : " + context+"******");
+            this.rabbitTemplate.convertAndSend("hello", context+"******");
+
+        return "success";
+        }
+
 }

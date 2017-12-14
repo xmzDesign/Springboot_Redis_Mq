@@ -16,7 +16,7 @@ import java.util.UUID;
  * @Description
  * @Date 2017/12/6
  */
-@RestController
+//@RestController
 public class SendController implements RabbitTemplate.ConfirmCallback{
     /**
      * 配置发送消息的rabbitTemplate，因为是构造方法，所以不用注解Spring也会自动注入（应该是新版本的特性）
@@ -69,10 +69,6 @@ public class SendController implements RabbitTemplate.ConfirmCallback{
             System.out.println("消息成功消费");
         } else {
             System.out.println("消息消费失败:" + cause+"\n重新发送");
-
         }
-
-
-
     }
 }

@@ -28,6 +28,7 @@ public class ManyTest {
     @Test
     public void oneToMany() throws Exception {
         for (int i=0;i<100;i++){
+           // Thread.sleep(10);
             neoSender.send(i);
         }
     }
